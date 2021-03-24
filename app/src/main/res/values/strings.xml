@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Trabalho 1</string>
+    <string name="ola">Olá! Bem-vindo ao meu App.</string>
+    <string name="bt_login">Fazer login</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="bt_splash">Voltar para tela inicial</string>
+</resources>
