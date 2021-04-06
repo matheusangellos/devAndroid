@@ -11,16 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trabalho1">
-        <activity android:name=".DetalhePostActivity" android:parentActivityName=".DetalhePostActivity" />
-        <activity android:name=".DetalhePhotoActivity" android:parentActivityName=".DetalhePhotoActivity" />
-        <activity android:name=".DetalheCommentActivity" android:parentActivityName=".DetalheCommentActivity" />
-        <activity android:name=".PostActivity" android:parentActivityName=".PostActivity" />
-        <activity android:name=".PhotoActivity" android:parentActivityName=".PhotoActivity" />
-        <activity android:name=".CommentActivity" android:parentActivityName=".CommentActivity" />
+        <activity
+            android:name=".DetalhePostActivity"
+            android:parentActivityName=".DetalhePostActivity" />
+        <activity
+            android:name=".DetalhePhotoActivity"
+            android:parentActivityName=".DetalhePhotoActivity" />
+        <activity
+            android:name=".DetalheCommentActivity"
+            android:parentActivityName=".DetalheCommentActivity" />
+        <activity
+            android:name=".PostActivity"
+            android:parentActivityName=".PostActivity" />
+        <activity
+            android:name=".PhotoActivity"
+            android:parentActivityName=".PhotoActivity" />
+        <activity
+            android:name=".CommentActivity"
+            android:parentActivityName=".CommentActivity" />
         <activity
             android:name=".TodoActivity"
             android:parentActivityName=".TodoActivity" />
-        <activity android:name=".DetalheTodoActivity" android:parentActivityName=".DetalheTodoActivity" />
+        <activity
+            android:name=".DetalheTodoActivity"
+            android:parentActivityName=".DetalheTodoActivity" />
         <activity
             android:name=".HomeActivity"
             android:parentActivityName=".HomeActivity" />

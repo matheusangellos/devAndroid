@@ -1,13 +1,14 @@
 package com.example.trabalho1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trabalho1.adapter.TodoAdapter;
 import com.example.trabalho1.model.Todo;
 
 import org.json.JSONArray;
@@ -56,6 +58,20 @@ public class TodoActivity extends AppCompatActivity  implements Response.Listene
                         json.getBoolean("completed"));
                 todos.add(obj);
             }
+            RecyclerView rv = findViewById(R.id.rvTodos);
+            //RecyclerView rv2 = findViewById(R.id.rvTodos2);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            //LinearLayoutManager llhm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            //LinearLayoutManager llhm2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            //GridLayoutManager glm = new GridLayoutManager(this, 3);
+            //StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+            rv.setLayoutManager(llm);
+            //rv2.setLayoutManager(llhm2);
+            TodoAdapter todoAdapter = new TodoAdapter(todos);
+            //TodoAdapter todoAdapter2 = new TodoAdapter(todos.subList(1, 4));
+            rv.setAdapter(todoAdapter);
+            //rv2.setAdapter(todoAdapter2);
+            /*
             LinearLayout ll = findViewById(R.id.layoutVerticalItens);
             for (Todo obj1 : todos) {
                 Button bt = new Button(this);
@@ -72,7 +88,7 @@ public class TodoActivity extends AppCompatActivity  implements Response.Listene
                     }
                 });
                 ll.addView(bt);
-            }
+            } */
         } catch (JSONException e) {
             Log.e("erro", e.getMessage());
             e.printStackTrace();

@@ -1,6 +1,8 @@
 package com.example.trabalho1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trabalho1.adapter.PostAdapter;
+import com.example.trabalho1.adapter.TodoAdapter;
 import com.example.trabalho1.model.Post;
 import com.example.trabalho1.model.Todo;
 
@@ -57,23 +61,11 @@ public class PostActivity extends AppCompatActivity implements Response.Listener
                         json.getString("body"));
                 posts.add(obj);
             }
-            LinearLayout ll = findViewById(R.id.layoutVerticalItens);
-            for (Post obj1 : posts) {
-                Button bt = new Button(this);
-                bt.setText(obj1.getTitle());
-                bt.setTag(obj1);
-                bt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Button btn = (Button) v;
-                        Post todo = (Post) btn.getTag();
-                        Intent intent = new Intent(getApplicationContext(), DetalhePostActivity.class);
-                        intent.putExtra("objPost", todo);
-                        startActivity(intent);
-                    }
-                });
-                ll.addView(bt);
-            }
+            RecyclerView rv = findViewById(R.id.rvPosts);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            PostAdapter postAdapter = new PostAdapter(posts);
+            rv.setAdapter(postAdapter);
         } catch (JSONException e) {
             Log.e("erro", e.getMessage());
             e.printStackTrace();

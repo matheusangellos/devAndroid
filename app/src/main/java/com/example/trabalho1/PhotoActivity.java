@@ -1,6 +1,8 @@
 package com.example.trabalho1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trabalho1.adapter.PhotoAdapter;
+import com.example.trabalho1.adapter.TodoAdapter;
 import com.example.trabalho1.model.Photo;
 import com.example.trabalho1.model.Post;
 
@@ -58,23 +62,11 @@ public class PhotoActivity extends AppCompatActivity implements Response.Listene
                         json.getString("thumbnailUrl"));
                 photos.add(obj);
             }
-            LinearLayout ll = findViewById(R.id.layoutVerticalItens);
-            for (Photo obj1 : photos) {
-                Button bt = new Button(this);
-                bt.setText(obj1.getTitle());
-                bt.setTag(obj1);
-                bt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Button btn = (Button) v;
-                        Photo todo = (Photo) btn.getTag();
-                        Intent intent = new Intent(getApplicationContext(), DetalhePhotoActivity.class);
-                        intent.putExtra("objPhoto", todo);
-                        startActivity(intent);
-                    }
-                });
-                ll.addView(bt);
-            }
+            RecyclerView rv = findViewById(R.id.rvPhotos);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            PhotoAdapter photoAdapter = new PhotoAdapter(photos);
+            rv.setAdapter(photoAdapter);
         } catch (JSONException e) {
             Log.e("erro", e.getMessage());
             e.printStackTrace();

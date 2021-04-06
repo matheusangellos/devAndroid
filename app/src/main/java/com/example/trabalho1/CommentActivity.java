@@ -1,6 +1,8 @@
 package com.example.trabalho1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +19,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trabalho1.adapter.CommentAdapter;
+import com.example.trabalho1.adapter.TodoAdapter;
 import com.example.trabalho1.model.Comment;
 import com.example.trabalho1.model.Post;
+import com.example.trabalho1.model.Todo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,23 +63,11 @@ public class CommentActivity extends AppCompatActivity implements Response.Liste
                         json.getString("body"));
                 comments.add(obj);
             }
-            LinearLayout ll = findViewById(R.id.layoutVerticalItens);
-            for (Comment obj1 : comments) {
-                Button bt = new Button(this);
-                bt.setText(obj1.getName());
-                bt.setTag(obj1);
-                bt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Button btn = (Button) v;
-                        Comment todo = (Comment) btn.getTag();
-                        Intent intent = new Intent(getApplicationContext(), DetalheCommentActivity.class);
-                        intent.putExtra("objComment", todo);
-                        startActivity(intent);
-                    }
-                });
-                ll.addView(bt);
-            }
+            RecyclerView rv = findViewById(R.id.rvComments);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            CommentAdapter commentAdapter = new CommentAdapter(comments);
+            rv.setAdapter(commentAdapter);
         } catch (JSONException e) {
             Log.e("erro", e.getMessage());
             e.printStackTrace();
